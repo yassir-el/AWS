@@ -1,0 +1,199 @@
+# EC2 
+
+EC2 stands for Elastic Compute Cloud. It is a web service provided by AWS that allows you to launch and manage virtual servers in the cloud. These virtual servers are called instances. You can create, start, stop, and terminate instances as needed. You can also scale up or down the number of instances based on your requirements. EC2 provides a wide range of instance types to choose from, each optimized for different use cases. You can select the instance type that best fits your workload and budget.
+
+EC2 instances can run various operating systems, such as Linux, Windows, and macOS. You can install your applications and services on these instances and use them for a variety of purposes, such as hosting websites, running databases, processing data, and more.
+
+## Before EC2
+
+Before EC2, organizations had to purchase physical servers to run their applications and services. This required a significant upfront investment in hardware, software, and infrastructure. Managing physical servers was also complex and time-consuming, as organizations had to deal with issues like hardware failures, capacity planning, and maintenance.
+
+With EC2, organizations can avoid these challenges by using virtual servers in the cloud. EC2 allows you to quickly provision and deploy instances without the need to purchase or maintain physical hardware. This provides flexibility, scalability, and cost savings, as you only pay for the resources you use.
+
+## EC2 Pricing Models
+
+EC2 offers several pricing models to meet different needs and budgets:
+
+1. **On-Demand Instances**: Pay for compute capacity by the hour or second with no long-term commitments. This is ideal for applications with short-term, spiky, or unpredictable workloads.
+
+2. **Reserved Instances**: Reserve capacity for a one- or three-year term and receive a significant discount compared to On-Demand pricing. This is ideal for applications with steady-state usage or predictable workloads.
+
+3. **Spot Instances**: Bid on unused EC2 capacity and pay the Spot price, which can be significantly lower than On-Demand pricing. This is ideal for applications that have flexible start and end times.
+
+4. **Dedicated Hosts**: Physical servers dedicated to your use. This is ideal for regulatory requirements, licensing restrictions, or when you need to use existing server-bound software licenses.
+
+5. **Savings Plans**: Commit to a consistent amount of usage (measured in $/hour) for a one- or three-year term and receive a discount on your EC2 usage. This is ideal for applications with steady-state usage or predictable workloads.
+
+## EC2 Instance Types
+
+EC2 offers a wide range of instance types optimized for different use cases. Each instance type comes with a unique combination of CPU, memory, storage, and networking capacity. Here are some common instance types:
+
+1. **General Purpose**: Balanced CPU, memory, and networking resources. Ideal for a wide range of workloads, including web servers, small databases, and development environments.
+
+2. **Compute Optimized**: High-performance processors for compute-intensive workloads. Ideal for batch processing, media transcoding, high-performance web servers, and scientific computing.
+
+3. **Memory Optimized**: High memory-to-CPU ratio for memory-intensive workloads. Ideal for in-memory databases, real-time big data analytics, and high-performance computing.
+
+4. **Storage Optimized**: High disk I/O performance for storage-intensive workloads. Ideal for NoSQL databases, data warehousing, and log processing.
+
+5. **Accelerated Computing**: Hardware accelerators, such as GPUs, for graphics-intensive workloads, machine learning, and scientific simulations.
+
+ssh -i mykey.pem ec2-user@mydomain.example
+
+# EBS Volumes
+
+EBS stands for Elastic Block Store. It is a block storage service provided by AWS that allows you to create persistent storage volumes and attach them to EC2 instances. EBS volumes are highly available and reliable, with built-in redundancy to protect your data. You can create, attach, detach, and delete EBS volumes as needed.
+
+EBS volumes are used to store data that persists beyond the life of an EC2 instance. This data can include operating system files, application data, databases, and more. EBS volumes are independent of EC2 instances, so you can attach them to different instances as needed.
+
+### EBS Volume Types
+
+EBS volumes come in different types to meet different performance and cost requirements:
+
+1. **General Purpose SSD (gp2)**: Balanced performance for a wide range of workloads. Ideal for most applications.
+
+2. **Provisioned IOPS SSD (io1)**: High-performance SSD volume designed for I/O-intensive workloads. Ideal for databases and critical business applications.
+
+3. **Throughput Optimized HDD (st1)**: Low-cost HDD volume designed for frequently accessed, throughput-intensive workloads. Ideal for big data, data warehouses, and log processing. these volumes cannot be boot volumes.
+
+4. **Cold HDD (sc1)**: Low-cost HDD volume designed for less frequently accessed workloads. Ideal for file servers, backup, and disaster recovery.
+
+5. **Magnetic (standard)**: Low-cost magnetic volume designed for workloads where data is accessed infrequently. Ideal for test and development environments.
+
+## EBS Snapshots
+
+EBS snapshots are point-in-time backups of EBS volumes. You can create snapshots of your EBS volumes to back up your data and protect against data loss. EBS snapshots are stored in Amazon S3, providing durability and availability. You can create snapshots manually or automate the process using AWS Backup or other tools.
+
+### EBS Encryption
+
+EBS volumes and snapshots can be encrypted to protect your data at rest. When you create an encrypted EBS volume, the data is automatically encrypted using AWS-managed keys. You can
+
+## Load Balancers
+
+Load balancers distribute incoming traffic across multiple EC2 instances to ensure high availability and fault tolerance. Load balancers monitor the health of instances and route traffic only to healthy instances. This helps to improve the performance and reliability of your applications.
+
+### Types of Load Balancers
+
+3. **Classic Load Balancer (CLB)**: Provides basic load balancing across multiple EC2 instances. Ideal for applications that require simple load balancing.
+    - Operates at both the request level and connection level.
+    - Supports TCP, SSL, and HTTP/HTTPS protocols.
+    - Supports sticky sessions to route requests to the same instance.
+    - Supports health checks to monitor the health of instances.
+
+1. **Application Load Balancer (ALB)**: Operates at the application layer (Layer 7) and can route traffic based on content, such as URL path or host header. Ideal for HTTP and HTTPS traffic.
+    - Operates at the request level.
+    - Supports HTTP and HTTPS protocols.
+    - Supports content-based routing to route requests based on URL path or host header.
+    - Supports path-based routing to route requests to different target groups based on URL path.
+    - Supports host-based routing to route requests to different target groups based on host header.
+    - Supports containerized applications with support for dynamic port mapping.
+    - Supports WebSocket and HTTP/2 traffic.
+    - Supports redirect actions to redirect requests to a different URL.
+    - Supports fixed-response actions to return a fixed response to clients.
+    - Supports health checks to monitor the health of instances.
+
+
+2. **Network Load Balancer (NLB)**: Operates at the transport layer (Layer 4) and can handle millions of requests per second. Ideal for TCP and UDP traffic.
+    - Operates at the connection level.
+    - Supports TCP, TLS, and UDP protocols.
+    - Supports static IP addresses for the load balancer.
+    - Supports cross-zone load balancing to distribute traffic evenly across all instances in all Availability Zones.
+    - Supports health checks to monitor the health of instances.
+
+
+# Route 53
+
+Route 53 is a scalable and highly available Domain Name System (DNS) web service provided by AWS. It allows you to register domain names, route traffic to resources, and manage the health of your applications and services. Route 53 provides a reliable and cost-effective way to route end users to Internet applications by translating domain names into IP addresses.
+
+# AWS CLI   
+
+The AWS Command Line Interface (CLI) is a unified tool to manage your AWS services from the command line. With the AWS CLI, you can automate tasks, create scripts, and manage resources in your AWS account. The AWS CLI provides a consistent interface for interacting with AWS services, regardless of the underlying service API.
+
+# AWS CloudShell
+
+AWS CloudShell is a browser-based shell that provides access to the AWS CLI and other tools directly from the AWS Management Console. With CloudShell, you can run commands, write scripts, and manage resources in your AWS account without the need to install or configure any software. CloudShell provides a secure and isolated environment for running commands and managing resources.
+
+# RDS 101
+
+Amazon RDS (Relational Database Service) is a managed database service provided by AWS. It allows you to easily set up, operate, and scale relational databases in the cloud. RDS automates common database administration tasks, such as provisioning, patching, backup, recovery, and scaling, so you can focus on building your applications.
+
+RDS supports several database engines, including MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, and Amazon Aurora. You can choose the database engine that best fits your application requirements. RDS provides high availability, durability, and security for your databases, with built-in features like automated backups, multi-AZ deployments, encryption, and monitoring.
+
+## RDS is for OLTP Workloads
+
+RDS is designed for Online Transaction Processing (OLTP) workloads, which involve frequent read and write operations on small amounts of data. OLTP applications typically require low latency, high availability, and data consistency. RDS is optimized for OLTP workloads and provides the performance, scalability, and reliability needed to run mission-critical applications.
+
+## RDS is not for OLAP Workloads
+
+RDS is not designed for Online Analytical Processing (OLAP) workloads, which involve complex queries on large amounts of data. OLAP applications typically require high throughput, complex analytics, and data warehousing capabilities. RDS is optimized for OLTP workloads and may not provide the performance and scalability needed for OLAP workloads.
+
+## RDS Multi-AZ and Read Replica 
+
+RDS provides two key features to improve the availability and scalability of your databases:
+    - Multi-AZ deployments: Automatically replicates your database to a standby instance in a different Availability Zone for high availability and failover protection.
+    - Multi-AZ : Used for disaster recovery and high availability.
+
+    
+    - Read replicas: Creates one or more read-only copies of your database for read scaling and offloading read traffic from the primary database.
+    - Read replicas: Used for read scaling and offloading read traffic from the primary database.
+
+## RDS Backups and Snapshots
+
+RDS provides automated backups and manual snapshots to protect your data and recover from accidental data loss. You can configure automated backups to take regular backups of your database and retain them for a specified period. You can also create manual snapshots of your database at any time to capture a point-in-time copy of your data.
+
+- Automated backups: Automatically taken daily backups of your database and retain them for a specified period. stored in S3. point-in-time recovery plus transaction logs.
+- Manual snapshots: Manually created point-in-time backups of your database that you can retain indefinitely.
+
+## Elasticache
+
+Amazon ElastiCache is a fully managed in-memory caching service provided by AWS. It allows you to deploy, operate, and scale in-memory caches in the cloud. ElastiCache supports popular open-source caching engines, such as Redis and Memcached, and provides high availability, durability, and low latency for your applications.
+
+ElastiCache is used to improve the performance and scalability of applications by caching frequently accessed data in memory. This reduces the load on backend databases and improves response times for users. ElastiCache is ideal for use cases like session management, real-time analytics, and content caching.
+
+## RDS proxy
+
+Amazon RDS Proxy is a fully managed database proxy service provided by AWS. It allows you to manage database connections for your RDS databases, improving scalability, availability, and security. RDS Proxy provides connection pooling, failover handling, and load balancing for your database connections, reducing the load on your database instances.
+
+RDS Proxy is used to improve the performance and reliability of applications by managing database connections more efficiently. It helps to reduce connection latency, improve connection management, and handle failover seamlessly. RDS Proxy is ideal for applications with high connection rates, such as web applications, microservices, and serverless applications.
+
+## MemoryDB for Redis
+
+Amazon MemoryDB for Redis is a fully managed, Redis-compatible, in-memory database service provided by AWS. It allows you to deploy, operate, and scale in-memory databases in the cloud. MemoryDB for Redis provides high availability, durability, and low latency for your applications, with built-in features like data persistence, replication, and encryption.
+
+MemoryDB for Redis is used to store and retrieve data in memory, providing fast access to frequently accessed data. It is ideal for use cases like caching, session management, real-time analytics, and high-performance applications. MemoryDB for Redis is fully compatible with the Redis protocol, allowing you to use existing Redis clients and libraries.
+
+Ultra-fast Performance: In-memory data store for sub-millisecond latency.
+
+## MemoryDB for Redis vs ElastiCache
+
+1. **MemoryDB for Redis**: 
+    - Primary database: database plus cache.
+
+2. **ElastiCache**:
+    - Database cache: cache only.
+
+
+## Parameter Store ?? !! 
+
+## AWS Secrets Manager ?? !!
+
+## EC2 Image Builder
+
+Amazon EC2 Image Builder is a fully managed service that allows you to automate the creation, management, and deployment of custom Amazon Machine Images (AMIs). EC2 Image Builder provides a simple and secure way to build and maintain secure, up-to-date, and compliant AMIs for your EC2 instances.
+
+EC2 Image Builder is used to automate the process of creating and managing AMIs, reducing manual effort and ensuring consistency across your environments. It allows you to define a pipeline of build steps, such as installing software, configuring settings, and running tests, to create custom AMIs. EC2 Image Builder integrates with other AWS services, such as AWS Systems Manager, AWS CodePipeline, and AWS CloudFormation, to automate the entire image building process.
+
+EC2 Image Builder allows you to create Virtual Machine Images (VMIs) for different use cases, such as development, testing, production, and disaster recovery. You can define custom build pipelines to create AMIs with specific configurations, security settings, and software packages. 
+
+Why use EC2 Image Builder?
+
+1. **Automate AMI creation**: Automate the process of creating, managing, and deploying custom AMIs for your EC2 instances.
+
+2. **Ensure consistency**: Ensure consistency across your environments by defining a pipeline of build steps to create custom AMIs.
+
+3. **Improve security**: Improve security by automatically applying security patches, updates, and configurations to your AMIs.
+
+4. **Reduce manual effort**: Reduce manual effort by automating the image building process and integrating with other AWS services.
+
+5. **Scale efficiently**: Scale efficiently by creating custom AMIs for different use cases, such as development, testing, production, and disaster recovery.
+
