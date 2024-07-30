@@ -1,0 +1,603 @@
+
+QUESTION 1
+
+Which of the following services can be used to securely store confidential information like credentials and license codes so that they can be accessed by EC2 instances?
+
+
+IAM
+
+
+Systems Manager Parameter Store
+
+
+KMS
+
+
+DynamoDB
+
+Good work!
+AWS Systems Manager Parameter Store provides secure, hierarchical storage for configuration data management and secrets management. You can store data such as passwords, database strings, and license codes as parameter values.
+
+
+
+
+
+
+QUESTION 2
+
+Individual EC2 instances are provisioned ________.
+
+
+In Availability Zones
+
+
+In Regions
+
+
+To a user
+
+
+Globally
+
+Good work!
+Correct. When provisioning an instance you must choose which Availability Zone the instance will belong to.
+
+
+
+QUESTION 3
+
+You have an EC2 instance in a single availability zone connected to an RDS instance. The EC2 instance needs to communicate to S3 to download some important configuration files from it. You try the command aws s3 cp s3://yourbucket /var/www/html however you receive an error message. You log in to Identity Access Management (IAM) and discover there is no role created to allow EC2 to communicate to S3. You create the role and attach it to the existing EC2 instance. How fast will the changes take to propagate?
+
+
+The same duration as CloudWatch standard monitoring – 5 minutes.
+
+
+Almost immediately.
+
+
+The same duration as CloudWatch detailed monitoring – 1 minute.
+
+
+It depends on the region and availability zone.
+
+Good work!
+Correct. You can change the permissions on the IAM role associated with a running instance, and the updated permissions take effect almost immediately.
+
+
+
+QUESTION 4
+
+You have been asked to encrypt an existing AMI that is unencrypted. How would you approach this?
+
+
+Create a new encryption key using KMS, then use the key to encrypt the AMI.
+
+
+Create an EC2 instance using the AMI, encrypt the EBS volume of the instance, then create an AMI based on the instance. 
+
+
+Copy the AMI and specify encryption when creating the copy.
+
+
+Select the AMI and select encryption. Then, save the AMI.
+
+Good work!
+You cannot add encryption to an existing AMI. Instead, you will need to create a copy and specify that the copy has encryption enabled.
+
+
+
+
+
+QUESTION 5
+
+You work for a web analytics firm who have recently migrated their application to AWS. The application sits behind an Elastic Load Balancer and it monitors user traffic to their website. You have noticed that in the application logs you are no longer seeing your users public IP addresses, instead you are seeing the private IP address of the elastic load balancer. This data is critical for your business and you need to rectify the issue immediately. What should you do?
+
+
+Install a CloudWatch logs agent on the EC2 instances behind the Elastic Load Balancer to monitor the public IPv4 addresses and then stream this data to AWS Neptune.
+
+
+Update the application to log the x-forwarded-for header to get your users public IPv4 addresses.
+
+
+Migrate the application to AWS Lambda instead of EC2 and put the Lambda function behind a Network Load Balancer.
+
+
+Migrate the application in front of a Network Load Balancer and then reverse proxy traffic to your RDS instance.
+
+Good work!
+Correct. Your access logs capture the IP address of your load balancer because the load balancer establishes the connection to your instances. You must perform additional configuration to capture the IP addresses of clients in your access logs. For Application Load Balancers and Classic Load Balancers with HTTP/HTTPS listeners, you must use X-Forwarded-For (https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#http-headers) headers to capture client IP addresses. Then, you must print those client IP addresses in your access logs. Reference: How do I capture client IP addresses in my ELB access logs? (https://aws.amazon.com/premiumsupport/knowledge-center/elb-capture-client-ip-addresses/)
+
+
+
+
+
+
+QUESTION 6
+
+You are designing a high-performance application that needs superfast database read and write performance. Which of the following services can be used as an in-memory data store for a 50 TB database, allowing you to store the entire dataset in memory?
+
+
+MemoryDB for Redis
+
+
+RDS Proxy 
+
+
+DynamoDB Accelerator 
+
+
+ElastiCache for Redis
+
+Sorry!
+ElastiCache for Redis is used to cache frequently accessed data to speed up database read queries for your database. It is not intended to be used to store your entire dataset. 
+
+Correct Answer
+MemoryDB for Redis is an in-memory data store that is capable of storing an entire dataset in memory. It supports datasets of ~100 TB in size.
+
+
+
+QUESTION 7
+
+You see a "timed out" error when using the AWS CLI to list all the files in an S3 bucket containing thousands of files. What could be the reason for this?
+
+
+You don't have the correct permission to run the command.
+
+
+You have not installed the AWS CLI correctly.
+
+
+Your network connection is too slow.
+
+
+Too many results are being returned which is causing the command to time out.
+
+Good work!
+Using the AWS CLI to list all the files in an S3 bucket containing thousands of files can cause your API call to exceed the maximum allowed time for the AWS CLI, and generate a "timed out" error. To avoid this, you can use the --page-size option to specify that the AWS CLI request a smaller number of items from each call to the AWS service.
+
+
+
+
+QUESTION 8
+
+You are the IT manager at a furniture retailer and they are considering moving their web application to AWS. They currently colocate their servers in a co-location facility and the contract for this facility is now coming to an end. Management are comfortable signing a 3 year contract and want to get the cheapest web servers as possible while still maintaining availability. Their traffic is very steady and predictable. What EC2 pricing model would you recommend to maintain availability and to get the lowest cost price available?
+
+
+Dedicated Instances.
+
+
+Reserved Instances.
+
+
+On-demand.
+
+
+Spot Instances.
+
+Good work!
+Correct. A Reserved Instance (RI) is an EC2 offering that provides you with a significant discount on EC2 usage when you commit to a one-year or three-year term.
+
+
+
+
+
+QUESTION 9
+
+You work for a government contractor who supply services that are critical to national security. Because of this your corporate IT policy states that no multi-tenant virtualization is authorized within the company. Despite this, they are interested in moving to AWS, but they cannot violate corporate IT policy. Which EC2 billing model would you recommend that they use to achieve this?
+
+
+Reserved Instances.
+
+
+Spot Instances.
+
+
+Dedicated Instances.
+
+
+On-demand.
+
+Good work!
+Correct. Dedicated instances run on its own dedicated hardware, solely belonging to that customer, and they do not share resources.
+
+
+
+
+QUESTION 10
+
+You run the internal intranet for a corporate bank. The intranet consists of a number of web servers and single relational database running Microsoft SQL Server. Your peak demand occurs at 9am every week morning when users are first logging in to the intranet. They can only log in using the company's internal network and it is not possible to access the intranet from any location other than within the office building for security purposes. Management is considering a change and to move this environment to AWS where users will be able to access the intranet via a software VPN. You have been asked to evaluate a migration to AWS and to identify the best EC2 billing model for your company's intranet. You must keep costs low and to be able to scale at particular times of day. You must maintain availability of the intranet throughout office hours. Management do not want to be locked into any contracts in case for some reason they want to go back to hosting internally. What EC2 billing model should you recommend?
+
+
+On-Demand.
+
+
+Dedicated Instances.
+
+
+Reserved Instances.
+
+
+Spot Instances.
+
+Good work!
+On-Demand Instances let you pay for compute capacity by the hour or second (minimum of 60 seconds) with no long-term commitments. On-demand instances satisfy the requirements of: low cost, availability during office hours and no lock in contracts. Dedicated instances are more costly, Reserved instances are a long term (1 or 3-year) commitment, and spot instances may terminate at any time so do not meet the availability requirements.
+
+
+
+
+QUESTION 11
+
+You are a developer for a genomics firm that is moving its infrastructure to the AWS Cloud. Their environment consists of a three-tier web application with a web tier, an application tier, and a relational database tier. They have a separate fleet of virtual machines used to access large HPC clusters. The lab researchers run multiple projects simultaneously, and they will need to launch and decommission 1,000's of nodes based on their varying needs. In order to stay competitive, they aim to reduce the time required to complete genomic sequencing from weeks to days, but they need to do this at the LOWEST possible cost, without long-term contracts. The team is ok with some flexibility in the processing times. The HPC clusters can run at any time, day or night, and their workloads store information in S3, ensuring that instances can be terminated at any time without affecting the data. What would be the best instance type to use?
+
+
+Dedicated Instances.
+
+
+On-demand Instances.
+
+
+Spot Instances.
+
+
+Reserved Instances.
+
+Good work!
+Correct. Amazon EC2 Spot Instances let you take advantage of unused EC2 capacity in the AWS cloud and are the lowest cost option for on-demand and short term capacity requirements. As the HPC cluster nodes store the data in S3 the termination of Spot instances will not impact the data processing. Both on-demand and dedicated instances are more expensive than Spot instances, and reserved instances are for long running applications (1 to 3 years) so are not suitable for this HPC cluster scenario.
+
+
+
+
+QUESTION 12
+
+Which of the following EBS volume types gives you SAN performance in the cloud and is suitable for the largest, most critical, high-performance applications?
+
+
+Provisioned IOPS SSD (io2)
+
+
+Provisioned IOPS SSD io2 Block Express
+
+
+General Purpose SSD (gp3)
+
+
+Throughput Optimized HDD (st1)
+
+Good work!
+Provisioned IOPS SSD io2 Block Express provides high performance, sub-millisecond latency SAN performance in the cloud. It is suitable for the largest, most critical, high-performance applications like Oracle, SAP HANA, Microsoft SQL Server, and SAS Analytics.. Each volume can support up to 64 TiB and 256,000 IOPS per volume.
+
+
+
+
+
+QUESTION 13
+
+Which of the following is a suitable use case for Provisioned IOPS SSD io2 Block Express EBS volumes?
+
+
+Storage for non-critical workloads that are not latency sensitive
+
+
+Large mission-critical applications that need SAN-level performance
+
+
+Boot volumes for general applications
+
+
+Cold data requiring few scans per day and applications that need the lowest cost.
+
+Good work!
+Provisioned IOPS SSD io2 Block Express provides high performance, sub-millisecond latency SAN performance in the cloud. It is suitable for the largest, most critical, high-performance applications like SAP HANA, Oracle, Microsoft SQL Server, and IBM DB2. Each volume can support up to 64 TB and 256,000 IOPS per volume.
+
+
+
+
+QUESTION 14
+
+You need a central place to store a software license key that is shared by multiple applications. Which of the following services provides the best approach so that the license is stored centrally and the applications can access it securely and reference it easily?
+
+
+KMS
+
+
+Parameter Store
+
+
+S3
+
+
+DynamoDB 
+
+Sorry!
+KMS is used to create and manage encryption keys. It is not used for storing license keys. 
+
+Correct Answer
+Parameter Store is a service designed to enable you to centrally store parameters, like environment variables, database connection strings, and license keys so that they can easily be accessed by the applications that need them. It supports encryption for sensitive information.
+
+
+
+QUESTION 15
+
+You have a very popular blog site, which has recently had a surge in traffic. You want to implement an ElastiCache solution to help take the load off the production database and you want to keep it as simple as possible. You will need to scale your cache horizontally and object caching will be your primary goal. Which ElastiCache solution will best suit your needs?
+
+
+ArangoDB
+
+
+Memcached
+
+
+Redis
+
+
+Couchbase
+
+Good work!
+Correct. The Memcached engine supports partitioning your data across multiple nodes. Because of this, Memcached clusters scale horizontally easily. For this scenario we do not require advanced data structure support, only object caching and horizontal scaling - so Redis is incorrect. Couchbase and ArangoDB are not supported by ElastiCache, so these are incorrect.
+
+
+
+
+
+QUESTION 16
+
+Which of the following is not a valid type of Elastic Load Balancers?
+
+
+Virtual Load Balancer
+
+
+Classic Load Balancer
+
+
+Network Load Balancer
+
+
+Application Load Balancer
+
+Good work!
+A Virtual Load Balancer is not offered by Elastic Load Balancing.
+
+
+
+
+QUESTION 17
+
+You would like to create a new AMI that is based on an existing AWS AMI, with the addition of the latest security patches. Which AWS service can be used to create a new AMI based on an existing AWS AMI? 
+
+
+AWS SAM 
+
+
+CloudShell
+
+
+CloudFormation
+
+
+Image Builder
+
+Good work!
+Image Builder is an AWS service that can be used to create a new AMI based on an existing AWS AMI. 
+
+
+
+
+
+QUESTION 18
+
+You have a three-tier web application with a web server tier, application tier, and database tier. The application is spread across multiple availability zones for redundancy and is in an Auto Scaling group with a minimum size of two and a maximum size of ten. The application relies on connecting to an RDS Multi-AZ database. When new instances are launched, they download a connection string file that is saved in an encrypted S3 bucket using a bootstrap script. During a routine scaling event, you notice that your new web servers are failing their health checks and are not coming into service. You investigate and discover that the web server's S3 read-only role has no policies attached to it. What combination of steps should you take to remediate this problem while maintaining the principle of least privilege?
+
+
+Create a new role giving Lambda permission to execute.
+
+
+Attach the S3 – Administrator policy.
+
+
+Create a snapshot of the EBS volume and then restart the instance.
+
+
+Leave the healthy instances as they are and allow new instances to come into service after fixing the policy issue.
+
+Sorry!
+Lambdas are not required in the solution.
+
+Correct Answer
+New instances can download a connection string, provided that the read-only policy is attached to the role. Instances will not download the connection string file without the S3 policy since it is required to allow the bootstrapping process to complete successfully.
+
+
+
+
+
+
+QUESTION 19
+
+After creating a new RDS database, you now need to find a solution for storing and automatically rotating the administrator password of the database. Which of the following services is the best option for securely storing and rotating the password?
+
+
+Secrets Manager
+
+
+Certificate Manager 
+
+
+Lambda environment variables
+
+
+KMS
+
+Good work!
+Secrets Manager is a service that allows you to securely store secrets, and it supports automatic rotation of database passwords.
+
+
+
+
+QUESTION 20
+
+In order to enable encryption at rest using EC2 and Elastic Block Store, you must ________.
+
+
+Configure encryption using X.509 certificates
+
+
+Configure encryption when creating the EBS volume
+
+
+Configure encryption using the appropriate Operating Systems file system
+
+
+Mount the EBS volume into S3 and then encrypt the bucket using a bucket policy.
+
+Good work!
+Correct. When you create a new, empty EBS volume, you can encrypt it by enabling encryption for the specific volume creation operation.
+
+
+
+
+
+
+
+
+QUESTION 21
+
+Your company has a web application on AWS. The application computes thousands of algorithms per second and is very CPU and disk intensive. The application runs on a c4.8xlarge, the largest C class instance available. The application stores its data locally on a General Purpose SSD (gp2) disk. Your application starts to perform slow. You check the logs and notice that your disk I/O is routinely reaching 16,000 IOPS. What should you do to remediate the issue?
+
+
+Migrate the EBS volume from a standard EBS volume to a provisioned IOPS EBS volume.
+
+
+Migrate the EBS volume from a standard EBS volume to a magnetic volume.
+
+
+Decrease the size of the EBS volume so as to increase its IOPS performance.
+
+
+Change the instance family from a c4.8xlarge to an r4.8xlarge so that you have more memory available to cope with the increased I/O.
+
+Good work!
+EBS provisioned IOPS is suitable for I/O-intensive, NoSQL, and relational databases, delivering up to 64,000 IOPS per volume.
+
+
+
+
+QUESTION 22
+
+Which AWS service can increase scalability, provides connection pooling, and increases resilience for applications connected to RDS?
+
+
+Resilience Hub
+
+
+API Gateway 
+
+
+DynamoDB Accelerator
+
+
+RDS Proxy
+
+Good work!
+RDS Proxy can be used to add scalability, provide connection pooling, and increase resilience for applications connected to RDS.
+
+
+
+
+
+
+QUESTION 23
+
+A new CIO joins your company and implements a new company policy that all EC2 EBS backed instances must have encryption at rest. What is the quickest and easiest way to apply this policy to your existing EC2 EBS backed instances?
+
+
+Create a snapshot of the EC2 volume. Then create a copy of the snapshot, checking the box to enable encryption. Create an AMI of the copied snapshot and then redeploy the EC2 instance using the encrypted AMI. Delete the old EC2 instance.
+
+
+Create an encrypted AMI of the EC2 volume using Windows BitLocker.
+
+
+In the AWS console, click on the EC2 instances, click actions and click encrypt EBS volumes.
+
+
+Create an encrypted snapshot of the EC2 volume using the encrypt-on-the-fly option. Create an AMI of the copied snapshot and then redeploy the EC2 instance using the encrypted AMI. Delete the old EC2 instance.
+
+Sorry!
+Incorrect. There is no direct way to encrypt an existing unencrypted volume or snapshot.
+
+Correct Answer
+Correct. Although there is no direct way to encrypt an existing unencrypted volume or snapshot, you can encrypt them by creating either a volume or a snapshot.
+
+
+
+
+
+
+QUESTION 24
+
+You work for an online gaming store which has a global worldwide leader board for players of the game. You need to implement a caching system for your leader board that has multiple availability zones in order to prevent an outage. Which ElastiCache solution should you use?
+
+
+Couchbase
+
+
+Redis
+
+
+ArangoDB
+
+
+Memcached
+
+Good work!
+Correct. Amazon ElastiCache for Redis supports both Redis cluster and non-cluster modes and provides high availability via support for automatic failover by detecting primary node failures and promoting a replica to be primary with minimal impact. It allows for read availability for your application by supporting read replicas (across availability zones), to enable the reads to be served when the primary is busy with the increased workload.
+
+
+
+
+
+QUESTION 25
+
+You have a WordPress site hosted on EC2 with a MySQL database hosted on RDS. The majority of your traffic is read traffic. There is only write traffic when you create a new blog. One of your blogs has gone viral and your WordPress site is struggling to cope. You check your CloudWatch metrics and notice your RDS instance is at 100% CPU utilization. Which of the following steps would reduce the CPU utilization?
+
+
+Create multiple read replicas in RDS and point the EC2 instances to the primary database. The EC2 instances will be automatically redirected to the read replicas if needed.
+
+
+Create an ElastiCache cluster and use this to cache your most frequently read blog posts.
+
+
+Migrate from an Elastic Load Balancer to a Network Load Balancer so you can sustain more connections.
+
+
+Enable Multi-AZ on your standard RDS instances and point multiple EC2 instances to the new Multi-AZ instances, thereby spreading the load.
+
+Sorry!
+In Amazon RDS, creating read replicas can indeed help to manage read traffic, but the redirection of traffic from the primary database to the read replicas is not automatic. The application must be specifically configured to direct read traffic to the read replicas.
+
+Correct Answer
+Using Amazon ElastiCache to cache frequently accessed data can significantly reduce the load on the RDS instance. By storing the most frequently read blog posts in the cache, you can serve most of the read traffic directly from the cache, reducing the number of read requests that the RDS instance needs to handle. This can significantly reduce the CPU utilization of the RDS instance.
+
+
+
+
+
+
+QUESTION 26
+
+You work for a media production company that streams popular TV shows to millions of users. They are migrating their web application from an in house solution to AWS. They will have a fleet of over 10,000 web servers to meet the demand and will need a reliable layer 4 load balancing solution capable of handling millions of requests per second. What AWS load balancing solution would best suit their needs?
+
+
+Network Load Balancer.
+
+
+Application Load Balancer.
+
+
+AWS Direct Connect.
+
+
+Elastic Load Balancer.
+
+Good work!
+Correct. Network Load Balancer is best suited for load balancing of Transmission Control Protocol (TCP), User Datagram Protocol (UDP) and Transport Layer Security (TLS) traffic where extreme performance is required. Operating at the connection level (Layer 4), Network Load Balancer routes traffic to targets within Amazon Virtual Private Cloud (Amazon VPC) and is capable of handling millions of requests per second while maintaining ultra-low latencies.
+
